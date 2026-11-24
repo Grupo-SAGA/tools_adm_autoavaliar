@@ -1,0 +1,12 @@
+{
+  "autoavaliar": {
+    "base": "https://adm.autoavaliar.com.br",
+    "login_path": "/loginsession.php",
+    "fields": {"usuario": "{user}", "senha": "{pass}", "login": "login"},
+    "inject": {"__aa_auto": "aa_auto"},
+    "fingerprint_cookies": ["fingerprint", "fingerprint_detalhes"],
+    "login_marker": "login-form",
+    "auth_markers": ["sair", "logout", "logoff"],
+    "https_only": true
+  }
+}

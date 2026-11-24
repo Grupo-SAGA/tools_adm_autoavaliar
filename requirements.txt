@@ -1,0 +1,3 @@
+curl_cffi>=0.7.4        # camada HTTP: impersona JA3/JA4 e HTTP/2
+pydoll-python>=2.0      # camada browser: CDP sem WebDriver, sinais limpos
+patchright>=1.49        # camada browser: fallback para alvos de protocolo

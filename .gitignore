@@ -1,0 +1,12 @@
+# segredos e sessao — NUNCA versionar
+.env
+.aabot-cookies.json
+*-cookies.json
+
+# ambiente / build
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/

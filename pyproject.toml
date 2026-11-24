@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aabot"
+version = "0.1.0"
+description = "Login/fetch stealth para adm.autoavaliar.com.br, consumivel por agentes de IA (Hermes)"
+requires-python = ">=3.10"
+dependencies = [
+  "curl_cffi>=0.7.4",
+  "pydoll-python>=2.0",
+  "patchright>=1.49",
+]
+
+[project.scripts]
+aabot = "aabot:main"
+
+[tool.setuptools]
+py-modules = ["aabot"]
