@@ -277,13 +277,18 @@ def _blocked_note(html: str) -> list[str]:
 def cmd_login(a) -> int:
     user = a.user or os.getenv("AABOT_USER") or os.getenv("USER")
     pw = a.password or os.getenv("AABOT_PASS") or os.getenv("PASSWORD")
-    if not user:
-        user = input("usuario: ").strip()
-    if not pw:
-        import getpass
-        pw = getpass.getpass("senha: ")
+    if not (user and pw):  # prompt so p/ humano; EOF (agente/stdin fechado) -> exit 13
+        try:
+            if not user:
+                print("usuario: ", end="", file=sys.stderr, flush=True)
+                user = input().strip()
+            if not pw:
+                import getpass
+                pw = getpass.getpass("senha: ")
+        except (EOFError, KeyboardInterrupt):
+            pass
     if not (user and pw):
-        return emit({"ok": False, "notes": ["credenciais ausentes"]}, a.json,
+        return emit({"ok": False, "notes": ["credenciais ausentes; passe --user/--password ou exporte AABOT_USER/AABOT_PASS (ex.: do cofre do agente)"]}, a.json,
                     EXIT["config"])
 
     profile = Profile(a.country, proxy=a.proxy, headed=a.headed)
