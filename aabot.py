@@ -429,9 +429,12 @@ def cmd_selfcheck(a) -> int:
             checks[mod] = "ok"
         except ImportError:
             checks[mod] = "AUSENTE"
-    chrome = any(Path(p).exists() for p in (
+    chrome = any(p and Path(p).exists() for p in (
         "/usr/bin/google-chrome", "/usr/bin/chromium", "/usr/bin/chromium-browser",
-        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"))
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        os.path.expandvars(r"%ProgramFiles%\Google\Chrome\Application\chrome.exe"),
+        os.path.expandvars(r"%ProgramFiles(x86)%\Google\Chrome\Application\chrome.exe"),
+        os.path.expandvars(r"%LocalAppData%\Google\Chrome\Application\chrome.exe")))
     checks["chrome_sistema"] = "ok" if chrome else "AUSENTE"
     checks["alvo"] = BASE
     bad = [k for k, v in checks.items() if v == "AUSENTE"]
